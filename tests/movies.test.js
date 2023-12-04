@@ -64,7 +64,7 @@ describe("POST /api/movies", () => {
     const response = await request(app)
       .post("/api/movies")
       .send(movieWithMissingProps);
-    expect(response.status).toEqual(500);
+    expect(response.status).toEqual(422);
   });
 });
 
@@ -104,7 +104,7 @@ describe("PUT /api/movies/:id", () => {
       .put(`/api/movies/${id}`)
       .send(updatedMovie);
 
-    expect(response.status).toEqual(204);
+    expect(response.status).toEqual(422);
 
     const [movies] = await database.query(
       "SELECT * FROM movies WHERE id=?",
